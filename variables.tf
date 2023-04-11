@@ -14,7 +14,7 @@ variable "aws_region" {
 variable "app_name" {
   type        = string
   description = "app name prefix for naming"
-  default     = "shoppr"
+  default     = "wordpress"
 }
 
 # vpc vars
@@ -31,11 +31,12 @@ variable "vpc" {
 #----------------------------------------
 # private subnet vars
 #----------------------------------------
-variable "public_subnets" {
-  default = {
-    "private-subnet-1" = 0
-    "private-subnet-2" = 1
-  }
+variable "public_subnet_names" {
+  default = ["public-subnet-1", "public-subnet-2"]
+}
+
+variable "database_subnet_names" {
+  default = ["db-subnet-1", "db-subnet-2"]
 }
 variable "map_public_ip_on_launch" {
   type        = bool
