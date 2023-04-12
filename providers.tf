@@ -1,4 +1,10 @@
 terraform {
+  cloud {
+    organization = "aalok-trivedi"
+    workspaces {
+      name = "wordpress_app_dev_us_east_1"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
