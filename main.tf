@@ -11,7 +11,7 @@ locals {
 
 }
 
-#Create vpc, subnets, and route tables
+# Create vpc, subnets, and route tables
 
 module "vpc" {
   source                  = "terraform-aws-modules/vpc/aws"
@@ -23,9 +23,17 @@ module "vpc" {
 
   azs = local.azs
 
-  # publiic subnets
-  public_subnets  = [for key, value in local.azs : cidrsubnet(local.vpc_cidr, var.public_newbits, key + var.public_newnum)]
+  # Public subnets
+  public_subnets = [for key, value in local.azs : cidrsubnet(local.vpc_cidr, var.public_newbits, key + var.public_newnum)]
+  public_subnet_tags = {
+    "Tier" = "Web"
+  }
+
+  # Private subnets
   private_subnets = [for key, value in local.azs : cidrsubnet(local.vpc_cidr, var.private_newbits, key + var.private_newnum)]
+  private_subnet_tags = {
+    "Tier" = "Database"
+  }
 
   # NAT
   enable_nat_gateway     = var.enable_nat_gateway
