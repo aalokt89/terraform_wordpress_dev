@@ -25,7 +25,7 @@ module "vpc" {
 
   # publiic subnets
   public_subnets  = [for key, value in local.azs : cidrsubnet(local.vpc_cidr, var.public_newbits, key + var.public_newnum)]
-  private_subnets = [for key, value in local.azs : cidrsubnet(local.vpc_cidr, var.private_newbits, key + var.prviate_newnum)]
+  private_subnets = [for key, value in local.azs : cidrsubnet(local.vpc_cidr, var.private_newbits, key + var.private_newnum)]
 
   # NAT
   enable_nat_gateway     = var.enable_nat_gateway
