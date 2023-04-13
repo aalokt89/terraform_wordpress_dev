@@ -1,5 +1,5 @@
 app_name    = "wordpress-app"
-environment = "PROD"
+environment = "DEV"
 aws_region  = "us-east-1"
 az_count    = 2
 

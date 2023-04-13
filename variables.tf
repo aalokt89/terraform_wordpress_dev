@@ -3,6 +3,15 @@
 variable "environment" {
   type    = string
   default = "DEV"
+
+  validation {
+    condition     = contains(["DEV", "QA", "PROD"], lower(var.environment))
+    error_message = "The 'environment' tag must be one of 'DEV','QA'. or 'PROD'."
+  }
+  validation {
+    condition     = upper(var.environment) == var.environment
+    error_message = "The 'environment' tag must be alll in uppercase."
+  }
 }
 variable "aws_region" {
   type        = string
