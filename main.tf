@@ -16,7 +16,7 @@ locals {
 module "vpc" {
   source                  = "terraform-aws-modules/vpc/aws"
   version                 = "4.0.1"
-  name                    = local.app_name
+  name                    = "${local.app_name}-${var.environment}"
   cidr                    = local.vpc_cidr
   enable_dns_hostnames    = var.enable_dns_hostnames
   map_public_ip_on_launch = var.map_public_ip_on_launch
