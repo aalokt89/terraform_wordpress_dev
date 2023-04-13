@@ -5,8 +5,8 @@ variable "environment" {
   default = "DEV"
 
   validation {
-    condition     = contains(["DEV", "QA", "PROD"], lower(var.environment))
-    error_message = "The 'environment' tag must be one of 'DEV','QA'. or 'PROD'."
+    condition     = contains(["DEV", "QA", "PROD"], upper(var.environment)
+    error_message = "The 'environment' tag must be one of 'DEV','QA', or 'PROD'."
   }
   validation {
     condition     = upper(var.environment) == var.environment
