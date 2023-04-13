@@ -21,7 +21,7 @@ variable "aws_region" {
 
 variable "az_count" {
   type        = number
-  description = "Number of availability zones too use"
+  description = "Number of availability zones to use"
   default     = 2
 }
 
