@@ -4,18 +4,12 @@ variable "environment" {
   type    = string
   default = "Dev"
 }
-
 variable "aws_region" {
   type    = string
   default = "us-east-1"
 }
 
-variable "vpc_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}
-
-# naming vars
+# App name
 #---------------------------------------
 variable "app_name" {
   type        = string
@@ -23,31 +17,25 @@ variable "app_name" {
   default     = "wordpress-app"
 }
 
-# vpc vars
+# VPC
 #----------------------------------------
-variable "vpc" {
-  type        = map(any)
-  description = "VPC vars"
-  default = {
-    cidr_block = "10.0.0.0/16"
-  }
+variable "vpc_cidr" {
+  type        = string
+  description = "VPC cidr"
+  default     = "10.0.0.0/16"
 }
-variable "enable_dns_hostnames" {
+variable "vpc_enable_dns_hostnames" {
   type        = bool
   description = "enable dns hostnames"
   default     = true
 }
 
-# public subnet vars
+# Subnets
 #----------------------------------------
-# private subnet vars
-#----------------------------------------
+
+# Public
 variable "public_subnet_names" {
   default = ["public-subnet-1", "public-subnet-2"]
-}
-
-variable "database_subnet_names" {
-  default = ["db-subnet-1", "db-subnet-2"]
 }
 variable "map_public_ip_on_launch" {
   type        = bool
@@ -55,9 +43,21 @@ variable "map_public_ip_on_launch" {
   default     = true
 }
 
+# Private
+variable "database_subnet_names" {
+  default = ["db-subnet-1", "db-subnet-2"]
+}
+
+# NAT gateway
+#----------------------------------------
 variable "enable_nat_gateway" {
   type        = bool
   description = "enable NAT gateway"
+  default     = true
+}
+variable "one_nat_gateway_per_az" {
+  type        = bool
+  description = "enable NAT gateway in each AZ"
   default     = true
 }
 
