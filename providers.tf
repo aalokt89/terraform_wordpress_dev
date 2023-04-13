@@ -21,8 +21,8 @@ provider "aws" {
   region = local.region
   default_tags {
     tags = {
-      App         = var.app_name
-      Environment = var.environment
+      App         = local.app_name
+      Environment = local.environment
       Terraform   = "True"
     }
   }
