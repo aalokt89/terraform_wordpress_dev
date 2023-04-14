@@ -35,6 +35,11 @@ variable "app_name" {
 
 # VPC
 #----------------------------------------
+variable "vpc_name" {
+  type        = string
+  description = "VPC name"
+  default     = "vpc"
+}
 variable "vpc_cidr" {
   type        = string
   description = "VPC cidr"

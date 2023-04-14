@@ -3,21 +3,18 @@
 data "aws_availability_zones" "available" {}
 
 locals {
-  app_name    = var.app_name
-  environment = var.environment
-  region      = var.aws_region
-  vpc_cidr    = var.vpc_cidr
+  name_prefix = "${var.app_name}-${var.environment}"
   azs         = slice(data.aws_availability_zones.available.names, 0, var.az_count)
-
 }
 
 # Create vpc, subnets, and route tables
+#----------------------------------------------------
 
 module "vpc" {
   source                  = "terraform-aws-modules/vpc/aws"
   version                 = "4.0.1"
-  name                    = "${local.app_name}-${var.environment}"
-  cidr                    = local.vpc_cidr
+  name                    = local.name_prefix
+  cidr                    = var.vpc_cidr
   enable_dns_hostnames    = var.enable_dns_hostnames
   map_public_ip_on_launch = var.map_public_ip_on_launch
 
@@ -41,3 +38,23 @@ module "vpc" {
   one_nat_gateway_per_az = var.one_nat_gateway_per_az
 
 }
+
+# Auto scaling wordpress servers
+#----------------------------------------------------
+module "wordpress_asg" {
+  source  = "terraform-aws-modules/autoscaling/aws"
+  version = "1.0.4"
+
+  instance_name = "${var.app_name}-server"
+  image_id      = var.ami
+  instance_type = var.instance_type
+  # security_groups = ["sg-12345678"]
+
+  # Auto scaling group
+  asg_name            = "${var.app_name}-asg"
+  vpc_zone_identifier = [for subnet in module.vpc.public_subnets : subnet.id]
+  # health_check_type         = "EC2"
+  min_size = 2
+  max_size = 4
+}
+
