@@ -18,19 +18,16 @@ variable "aws_region" {
   description = "AWS region"
   default     = "us-east-1"
 }
+variable "app_name" {
+  type        = string
+  description = "app name prefix for naming"
+  default     = "wordpressApp"
+}
 
 variable "az_count" {
   type        = number
   description = "Number of availability zones to use"
   default     = 2
-}
-
-# App name
-#---------------------------------------
-variable "app_name" {
-  type        = string
-  description = "app name prefix for naming"
-  default     = "wordpress-app"
 }
 
 # VPC
