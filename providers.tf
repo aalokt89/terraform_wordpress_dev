@@ -10,10 +10,11 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.60.0"
     }
+  }
 }
 
 provider "aws" {
-  region = local.region
+  region = var.aws_region
   default_tags {
     tags = {
       App         = var.app_name
