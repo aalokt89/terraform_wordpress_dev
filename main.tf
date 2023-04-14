@@ -39,22 +39,3 @@ module "vpc" {
 
 }
 
-# Auto scaling wordpress servers
-#----------------------------------------------------
-module "wordpress_asg" {
-  source  = "terraform-aws-modules/autoscaling/aws"
-  version = "1.0.4"
-
-  instance_name = "${var.app_name}-server"
-  image_id      = var.ami
-  instance_type = var.instance_type
-  # security_groups = ["sg-12345678"]
-
-  # Auto scaling group
-  asg_name            = "${var.app_name}-asg"
-  vpc_zone_identifier = [for subnet in module.vpc.public_subnets : subnet.id]
-  # health_check_type         = "EC2"
-  min_size = 2
-  max_size = 4
-}
-
