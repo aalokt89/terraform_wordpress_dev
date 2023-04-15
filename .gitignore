@@ -1,3 +1,6 @@
+*.drawio.*
+*.drawio
+
 # Local .terraform directories
 **/.terraform/*
 
