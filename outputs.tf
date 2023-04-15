@@ -3,8 +3,8 @@ output "vpc_id" {
 }
 
 output "public_subnets" {
-  value = [for subnet in module.network.public_subnets : subnet.id]
+  value = module.network.public_subnets
 }
 output "private_subnets" {
-  value = [for subnet in module.network.private_subnets : subnet.id]
+  value = module.network.private_subnets
 }
