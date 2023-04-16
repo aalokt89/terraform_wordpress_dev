@@ -85,12 +85,12 @@ variable "private_newnum" {
 variable "enable_nat_gateway" {
   type        = bool
   description = "enable NAT gateway"
-  default     = true
+  default     = false
 }
 variable "single_nat_gateway" {
   type        = bool
   description = "enable single NAT"
-  default     = true
+  default     = false
 }
 variable "one_nat_gateway_per_az" {
   type        = bool
