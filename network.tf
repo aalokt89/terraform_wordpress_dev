@@ -34,9 +34,7 @@ module "network" {
   }
 
   # NAT
-  enable_nat_gateway     = var.enable_nat_gateway
-  single_nat_gateway     = var.single_nat_gateway
-  one_nat_gateway_per_az = var.one_nat_gateway_per_az
+  enable_nat_gateway = var.enable_nat_gateway
 
 }
 
