@@ -77,7 +77,7 @@ variable "private_newbits" {
 variable "private_newnum" {
   type        = number
   description = "number to add for private_subnet 'newnum' cidrsubnet() function"
-  default     = 4
+  default     = 8
 }
 
 # NAT gateway
