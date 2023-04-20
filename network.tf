@@ -35,6 +35,5 @@ module "network" {
 
   # NAT
   enable_nat_gateway = var.enable_nat_gateway
-
 }
 
