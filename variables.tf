@@ -177,3 +177,9 @@ variable "db_availability_zone" {
   description = "wordpress db engine version"
   default     = "us-east-1a"
 }
+variable "db_final_snapshot_identifier" {
+  type        = string
+  description = "final snapsht name"
+  default     = "wordpress-final-snapshot"
+}
+
