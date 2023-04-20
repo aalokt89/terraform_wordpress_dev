@@ -2,6 +2,7 @@
 #----------------------------------------------------
 
 resource "aws_db_instance" "wordpress" {
+  identifier             = var.db_identifier
   allocated_storage      = var.db_allocated_storage
   max_allocated_storage  = var.db_max_allocated_storage
   db_name                = var.db_name

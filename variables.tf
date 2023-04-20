@@ -118,6 +118,11 @@ variable "db_port" {
 
 # RDS wordpress
 #----------------------------------------
+variable "db_identifier" {
+  type        = string
+  description = "db instance name"
+  default     = "wordpress"
+}
 variable "db_allocated_storage" {
   type        = number
   description = "db allocated storage"
