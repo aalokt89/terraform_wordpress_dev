@@ -177,10 +177,14 @@ variable "db_availability_zone" {
   description = "wordpress db engine version"
   default     = "us-east-1a"
 }
-
 variable "db_skip_final_snapshot" {
   type        = bool
   description = "skip final snapshot"
   default     = true
+}
+variable "db_final_snapshot_identifier" {
+  type        = string
+  description = "final snapshot name"
+  default     = "wordpress-final-snapshot"
 }
 
