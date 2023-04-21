@@ -242,3 +242,54 @@ variable "web_alb_listener_http_action_type" {
   description = "http listener action type"
   default     = "forward"
 }
+
+# WordPress ASG
+#----------------------------------------
+variable "wordpress_asg_min_size" {
+  type        = number
+  description = "asg min size"
+  default     = 2
+}
+variable "wordpress_asg_max_size" {
+  type        = number
+  description = "asg max size"
+  default     = 4
+}
+variable "wordpress_asg_health_check_type" {
+  type        = string
+  description = "asg health check type "
+  default     = "ELB"
+}
+#Launch template
+variable "wordpress_server_name" {
+  type        = string
+  description = "wordpress template name"
+  default     = "wordpress-server"
+}
+variable "wordpress_template_instance_type" {
+  type        = string
+  description = "wordpress server type"
+  default     = "t2.micro"
+}
+variable "wordpress_template_enable_monitoring" {
+  type        = bool
+  description = "wordpress server enable monitoring"
+  default     = true
+}
+#Scaling policy
+variable "wordpress_asg_scaling_policy_type" {
+  type        = string
+  description = "wordpress asg scalng policy type"
+  default     = "TargetTrackingScaling"
+}
+variable "wordpress_asg_scaling_policy_metric_type" {
+  type        = string
+  description = "wordpress asg scalng policy metric type"
+  default     = "ASGAverageCPUUtilization"
+}
+variable "wordpress_asg_scaling_policy_target_value" {
+  type        = number
+  description = "wordpress asg scalng policy target value"
+  default     = 75.0
+}
+

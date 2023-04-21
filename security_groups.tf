@@ -81,7 +81,7 @@ resource "aws_security_group" "wordpress_rds" {
     from_port       = var.db_port
     to_port         = var.db_port
     protocol        = "tcp"
-    security_groups = [aws_security_group.wordpress_ec2.id]
+    security_groups = [aws_security_group.wordpress_ec2_sg.id]
   }
   lifecycle {
     create_before_destroy = true
@@ -98,7 +98,7 @@ resource "aws_security_group" "wordpress_rds" {
 
 
 # wordpress ec2 sg
-resource "aws_security_group" "wordpress_ec2" {
+resource "aws_security_group" "wordpress_ec2_sg" {
   name        = "${local.name_prefix}-wordpress-ec2-sg"
   description = "Allows inbound http/https traffic from ALB sg and all outboound traffic. Attached to ec2"
   vpc_id      = module.network.vpc_id
