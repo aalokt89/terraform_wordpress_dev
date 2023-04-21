@@ -185,6 +185,6 @@ variable "db_skip_final_snapshot" {
 variable "db_final_snapshot_identifier" {
   type        = string
   description = "final snapshot name"
-  default     = "wordpress-final-snapshot"
+  default     = "wordpress-db-final-snapshot"
 }
 
