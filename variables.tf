@@ -271,6 +271,11 @@ variable "wordpress_template_instance_type" {
   description = "wordpress server type"
   default     = "t2.micro"
 }
+variable "key_name" {
+  type        = string
+  description = "wordpress server key pair"
+  sensitive   = true
+}
 variable "wordpress_template_enable_monitoring" {
   type        = bool
   description = "wordpress server enable monitoring"
