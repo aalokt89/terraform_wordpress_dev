@@ -276,6 +276,22 @@ variable "key_name" {
   description = "wordpress server key pair"
   sensitive   = true
 }
+#Wordpress account
+variable "wp_username" {
+  type        = string
+  description = "wordpress username"
+  sensitive   = true
+}
+variable "wp_password" {
+  type        = string
+  description = "wordpress password"
+  sensitive   = true
+}
+variable "wp_email" {
+  type        = string
+  description = "wordpress email"
+  sensitive   = true
+}
 variable "wordpress_template_enable_monitoring" {
   type        = bool
   description = "wordpress server enable monitoring"

@@ -1,4 +1,3 @@
-
 # Get amazon linux 2 ami
 data "aws_ami" "amazon_linux2" {
   most_recent = true
@@ -13,7 +12,7 @@ data "aws_ami" "amazon_linux2" {
 # Autoscaling group
 #----------------------------------------
 module "wordpress_asg" {
-  depends_on = [aws_db_instance.wordpress]
+  depends_on = [aws_db_instance.wordpress, aws_lb.web_alb]
   source     = "terraform-aws-modules/autoscaling/aws"
   version    = "6.9.0"
 
@@ -35,7 +34,7 @@ module "wordpress_asg" {
   security_groups   = [aws_security_group.ssh_sg.id, aws_security_group.wordpress_ec2_sg.id]
   key_name          = var.key_name
 
-  user_data = filebase64("install_wordpress.sh")
+  user_data = data.template_file.user_data.rendered
 
   scaling_policies = {
     avg-cpu-policy-greater-than-75 = {
@@ -51,5 +50,22 @@ module "wordpress_asg" {
 
   tags = {
     Name = "${local.name_prefix}-${var.wordpress_server_name}-asg"
+  }
+}
+
+# user data wordpress script template
+data "template_file" "user_data" {
+  template = file("${path.module}/install_wordpress.tpl")
+  vars = {
+    db_username = var.db_username
+    db_password = var.db_password
+    db_name     = var.db_name
+    db_host     = aws_db_instance.wordpress.address
+
+    wp_username = var.wp_username
+    wp_password = var.wp_password
+    wp_email    = var.wp_email
+    wp_url      = aws_lb.web_alb.dns_name
+    wp_title    = var.app_name
   }
 }
