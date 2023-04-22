@@ -34,7 +34,7 @@ module "wordpress_asg" {
   security_groups   = [aws_security_group.ssh_sg.id, aws_security_group.wordpress_ec2_sg.id]
   key_name          = var.key_name
 
-  user_data = data.template_file.user_data.rendered
+  user_data = filebase64(data.template_file.user_data.rendered)
 
   scaling_policies = {
     avg-cpu-policy-greater-than-75 = {
