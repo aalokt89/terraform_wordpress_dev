@@ -3,7 +3,7 @@
 data "aws_availability_zones" "available" {}
 
 locals {
-  name_prefix = "${var.app_name}-${var.environment}"
+  name_prefix = lower("${var.app_name}-${var.environment}")
   azs         = slice(data.aws_availability_zones.available.names, 0, var.az_count)
 }
 
