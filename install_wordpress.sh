@@ -26,7 +26,7 @@ wp core download --allow-root
 wp config create --dbname=wordpress --dbuser=admin --dbpass=password --dbhost=wordpress.cgwzuzkgdaxy.us-east-1.rds.amazonaws.com --allow-root
 
 # Install WordPress
-wp core install --url=54.226.72.43 --title="my-wordpress" --admin_user=admin --admin_password=password --admin_email=hello@gmail.com --allow-root
+# wp core install --url=54.226.72.43 --title="my-wordpress" --admin_user=admin --admin_password=password --admin_email=hello@gmail.com --allow-root
 
 
 # Set the appropriate permissions
