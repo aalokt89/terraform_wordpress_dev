@@ -19,7 +19,7 @@ output "alb_dns" {
 }
 
 data "aws_instances" "wordpress_instances" {
-  instance_state_names = "running"
+  instance_state_names = ["running"]
 }
 output "instance_public_ips" {
   description = "get public IPs of instances"
