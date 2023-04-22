@@ -36,7 +36,7 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 # Create the WordPress configuration file
 cd /var/www/html
 wp core download --allow-root
-wp config create --dbname=$db_name --dbuser=$db_user --dbpass=$db_password --dbhost=$db_host --allow-root
+wp config create --dbname=$db_name --dbuser=$db_username --dbpass=$db_password --dbhost=$db_host --allow-root
 
 # Install WordPress
 wp core install --url=$wp_url --title=$wp_title --admin_user=$wp_username --admin_password=$wp_password --admin_email=$wp_email --allow-root
