@@ -33,6 +33,8 @@ module "wordpress_asg" {
   instance_type     = var.wordpress_template_instance_type
   enable_monitoring = var.wordpress_template_enable_monitoring
   security_groups   = [aws_security_group.ssh_sg.id, aws_security_group.wordpress_ec2_sg.id]
+  key_name = 
+  
   user_data         = filebase64("install_wordpress.sh")
 
   scaling_policies = {
