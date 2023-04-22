@@ -1,16 +1,16 @@
 #!/bin/bash
 
 #template vars
-db_username = ${db_username}
-db_password = ${db_password}
-db_name = ${db_name}
-db_host = ${db_host}
+db_username=${db_username}
+db_password=${db_password}
+db_name=${db_name}
+db_host=${db_host}
 
-wp_username = ${wp_username}
-wp_password = ${wp_password}
-wp_email    = ${wp_email}
-wp_url      = ${wp_url}
-wp_title    = ${wp_title}
+wp_username=${wp_username}
+wp_password=${wp_password}
+wp_email=${wp_email}
+wp_url=${wp_url}
+wp_title=${wp_title}
 
 sudo yum update -y
 sudo yum install -y httpd mysql
