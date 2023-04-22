@@ -1,4 +1,17 @@
 #!/bin/bash
+
+#template vars
+db_username = ${db_username}
+db_password = ${db_password}
+db_name = ${db_name}
+db_host = ${db_host}
+
+wp_username = ${wp_username}
+wp_password = ${wp_password}
+wp_email    = ${wp_email}
+wp_url      = ${wp_url}
+wp_title    = ${wp_title}
+
 sudo yum update -y
 sudo yum install -y httpd mysql
 sudo systemctl start httpd
@@ -23,10 +36,10 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 # Create the WordPress configuration file
 cd /var/www/html
 wp core download --allow-root
-wp config create --dbname=wordpress --dbuser=admin --dbpass=password --dbhost=wordpress.cgwzuzkgdaxy.us-east-1.rds.amazonaws.com --allow-root
+wp config create --dbname=$db_name --dbuser=$db_user --dbpass=$db_password --dbhost=$db_host --allow-root
 
 # Install WordPress
-# wp core install --url=54.226.72.43 --title="my-wordpress" --admin_user=admin --admin_password=password --admin_email=hello@gmail.com --allow-root
+wp core install --url=$wp_url --title=$wp_title --admin_user=$wp_username --admin_password=$wp_password --admin_email=$wp_email --allow-root
 
 
 # Set the appropriate permissions
