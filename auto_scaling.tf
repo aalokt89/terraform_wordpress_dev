@@ -13,15 +13,16 @@ data "aws_ami" "amazon_linux2" {
 # Autoscaling group
 #----------------------------------------
 module "wordpress_asg" {
-  source  = "terraform-aws-modules/autoscaling/aws"
-  version = "6.9.0"
+  depends_on = [aws_db_instance.wordpress]
+  source     = "terraform-aws-modules/autoscaling/aws"
+  version    = "6.9.0"
 
-  name = "${local.name_prefix}-${var.wordpress_server_name}-asg"
+  name                = "${local.name_prefix}-${var.wordpress_server_name}-asg"
   min_size            = var.wordpress_asg_min_size
   max_size            = var.wordpress_asg_max_size
   health_check_type   = var.wordpress_asg_health_check_type
   vpc_zone_identifier = module.network.public_subnets
-  target_group_arns = [aws_lb_target_group.web_alb_tg_http.arn]
+  target_group_arns   = [aws_lb_target_group.web_alb_tg_http.arn]
 
 
   # Launch template
@@ -31,8 +32,8 @@ module "wordpress_asg" {
   image_id          = data.aws_ami.amazon_linux2.id
   instance_type     = var.wordpress_template_instance_type
   enable_monitoring = var.wordpress_template_enable_monitoring
-  security_groups = [aws_security_group.ssh_sg.id, aws_security_group.wordpress_ec2_sg.id]
-  user_data = <<-EOF
+  security_groups   = [aws_security_group.ssh_sg.id, aws_security_group.wordpress_ec2_sg.id]
+  user_data         = <<-EOF
             #!/bin/bash
             sudo yum update -y
             sudo yum install -y httpd mysql
@@ -70,7 +71,7 @@ module "wordpress_asg" {
 
   scaling_policies = {
     avg-cpu-policy-greater-than-75 = {
-      policy_type               = var.wordpress_asg_scaling_policy_type
+      policy_type = var.wordpress_asg_scaling_policy_type
       target_tracking_configuration = {
         predefined_metric_specification = {
           predefined_metric_type = var.wordpress_asg_scaling_policy_metric_type
