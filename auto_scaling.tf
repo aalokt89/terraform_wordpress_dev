@@ -36,17 +36,17 @@ module "wordpress_asg" {
 
   user_data = base64encode(data.template_file.user_data.rendered)
 
-  scaling_policies = {
-    avg-cpu-policy-greater-than-75 = {
-      policy_type = var.wordpress_asg_scaling_policy_type
-      target_tracking_configuration = {
-        predefined_metric_specification = {
-          predefined_metric_type = var.wordpress_asg_scaling_policy_metric_type
-        }
-        target_value = var.wordpress_asg_scaling_policy_target_value
-      }
-    }
-  }
+  # scaling_policies = {
+  #   avg-cpu-policy-greater-than-75 = {
+  #     policy_type = var.wordpress_asg_scaling_policy_type
+  #     target_tracking_configuration = {
+  #       predefined_metric_specification = {
+  #         predefined_metric_type = var.wordpress_asg_scaling_policy_metric_type
+  #       }
+  #       target_value = var.wordpress_asg_scaling_policy_target_value
+  #     }
+  #   }
+  # }
 
   tags = {
     Name = "${local.name_prefix}-${var.wordpress_server_name}-asg"
